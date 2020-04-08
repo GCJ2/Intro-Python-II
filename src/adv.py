@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -50,32 +51,34 @@ def print_details():
 
 def chose_again():
     print('You cannot move that way')
+    print(new_player.items)
 
 
 def main():
-    direction = ''      # Empty string for taking in user input
-    while direction != 'q':     # As long as the direction is not q
+    print_details()
+    direction = ''  # Empty string for taking in user input
+    while direction != 'q':  # As long as the direction is not q
         direction = input('Please select a direction: N, S, E, W or press Q to quit. ')
         if direction == 'n':
-            if hasattr(new_player.current_room, 'n_to'):    # Looks at current room respective attribute
-                new_player.set_current_room(new_player.current_room.n_to)   # If found, set current room to that room
-                print_details()                                             # Which is equal to the adjacent room
+            if new_player.current_room.n_to is not None:  # Looks at current room respective attribute
+                new_player.set_current_room(new_player.current_room.n_to)  # If found, set current room to that room
+                print_details()  # Which is equal to the adjacent room
             else:
                 chose_again()
         if direction == 'e':
-            if hasattr(new_player.current_room, 'e_to'):
+            if new_player.current_room.e_to is not None:
                 new_player.set_current_room(new_player.current_room.e_to)
                 print_details()
             else:
                 chose_again()
         if direction == 's':
-            if hasattr(new_player.current_room, 's_to'):
+            if new_player.current_room.s_to is not None:
                 new_player.set_current_room(new_player.current_room.s_to)
                 print_details()
             else:
                 chose_again()
         if direction == 'w':
-            if hasattr(new_player.current_room, 'w_to'):
+            if new_player.current_room.w_to is not None:
                 new_player.set_current_room(new_player.current_room.w_to)
                 print_details()
             else:
@@ -85,6 +88,7 @@ def main():
 
 
 main()
+
 # Write a loop that:
 #
 # * Prints the current room name
