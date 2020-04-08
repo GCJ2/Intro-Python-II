@@ -23,6 +23,15 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+sword = Item('Sword', 'A slashy')
+dagger = Item('Dagger', 'Get stabby')
+cape = Item('Denim Cape', "It's perfect")
+treasure = Item('Treasure', 'A box that says Wrath of the Lich King')
+
+room['outside'].items = [sword]
+room['narrow'].items = [dagger, cape]
+room['treasure'].items = [treasure]
+
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -45,6 +54,8 @@ new_player = Player('Greg', room['outside'])
 def print_details():
     print()
     print(new_player.current_room.name)
+    if len(new_player.current_room.items) > 0:
+        print(f'You found a {new_player.current_room.see_items()}')
     print(new_player.current_room.description)
     print()
 

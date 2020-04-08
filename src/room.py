@@ -18,5 +18,6 @@ class Room:
     def get_description(self):
         return self.description
 
-    def see_item(self):
-        return self.items
+    def see_items(self):
+        for i in self.items:
+            return i.name
