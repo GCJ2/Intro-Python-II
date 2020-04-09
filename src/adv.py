@@ -55,14 +55,37 @@ def print_details():
     print()
     print(new_player.current_room.name)
     if len(new_player.current_room.items) > 0:
-        print(f'You found a {new_player.current_room.see_items()}')
+        get_weapon()
+    else:
+        print('The room is empty.')
     print(new_player.current_room.description)
     print()
+
+    # print weapon
+    # prompt to pick up weapon
+    # if yes, remove from room list and add to character list
+    # if no, do nothing
+
+
+def get_weapon():
+    print(f'You found a {new_player.current_room.see_items()}')
+    if len(new_player.current_room.items) == 1:
+        choice = input(f'Would you like to pick up the items? yes/no ')
+        if choice == 'yes':
+            new_player.items.extend(new_player.current_room.items)
+            new_player.current_room.items.clear()
+            print('The room is empty.')
+            print(new_player.see_items())
+        else:
+            print(f'You leave the {new_player.current_room.see_items()}')
+            new_player.see_items()
+    else:
+        print(f'You leave the {new_player.current_room.see_items()}')
+        new_player.see_items()
 
 
 def chose_again():
     print('You cannot move that way')
-    print(new_player.items)
 
 
 def main():

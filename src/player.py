@@ -14,14 +14,15 @@ class Player:
     def get_current_room(self):
         return self.current_room.name
 
-    def get_current_items(self):
+    def see_items(self):
+        print('Current Inventory:')
         for i in self.items:
-            return i.name
+            print(i.name)
 
-    def set_current_room(self, xcr):    # Need ability to change current room
-        self.current_room = xcr         # xcr = change current room
+    def set_current_room(self, xcr):  # Need ability to change current room
+        self.current_room = xcr  # xcr = change current room
 
-    def pick_up_item(self, item):
-        self.items.append(item)
-        print(f'You picked up the {item.name}')
-        print(self.get_current_items())
+    def drop_item(self, item):
+        self.items.remove(item)
+        print(f'You dropped the {item.name}')
+        print(self.see_items())
