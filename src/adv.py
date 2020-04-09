@@ -54,11 +54,12 @@ new_player = Player('Greg', room['outside'])
 def print_details():
     print()
     print(new_player.current_room.name)
+    print(new_player.current_room.description)
     if len(new_player.current_room.items) > 0:
         get_weapon()
+
     else:
         print('The room is empty.')
-    print(new_player.current_room.description)
     print()
 
     # print weapon
@@ -75,13 +76,13 @@ def get_weapon():
             new_player.items.extend(new_player.current_room.items)
             new_player.current_room.items.clear()
             print('The room is empty.')
-            print(new_player.see_items())
+            for i in new_player.see_items():
+                print(i)
         else:
             print(f'You leave the {new_player.current_room.see_items()}')
             new_player.see_items()
-    else:
+    elif len(new_player.current_room.items) > 1:
         print(f'You leave the {new_player.current_room.see_items()}')
-        new_player.see_items()
 
 
 def chose_again():
@@ -92,7 +93,7 @@ def main():
     print_details()
     direction = ''  # Empty string for taking in user input
     while direction != 'q':  # As long as the direction is not q
-        direction = input('Please select a direction: N, S, E, W or press Q to quit. ')
+        direction = input('Please select a direction: N, S, E, W or press Q to quit. Or press d to drop an item ')
         if direction == 'n':
             if new_player.current_room.n_to is not None:  # Looks at current room respective attribute
                 new_player.set_current_room(new_player.current_room.n_to)  # If found, set current room to that room
@@ -117,6 +118,18 @@ def main():
                 print_details()
             else:
                 chose_again()
+        if direction == 'd':
+            if len(new_player.items) == 0:
+                print('There is nothing to drop')
+            else:
+                print('What item would you like to drop? ')
+                choice = input()
+                print(choice)
+                for item in new_player.items:
+                    if item.name == choice:
+                        new_player.drop_item(item)
+                    else:
+                        print('FUCK YOU CODY')
         elif direction == "q":
             print(f'Thank you for playing!')
 
