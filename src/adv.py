@@ -129,7 +129,7 @@ def main():
                     if item.name == choice:
                         new_player.drop_item(item)
                     else:
-                        print('FUCK YOU CODY')
+                        print('')
         elif direction == "q":
             print(f'Thank you for playing!')
 

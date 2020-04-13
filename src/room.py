@@ -19,5 +19,5 @@ class Room:
         return self.description
 
     def see_items(self):
-        for i in self.items:
-            return i.name
+        inventory = [i.name for i in self.items]
+        return inventory
